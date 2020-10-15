@@ -331,7 +331,6 @@
           rect(0, 0, 600, 50)
           drawCircles();
           drawTrees(trees);
-          image(img, 0, 0);
           cursor(CROSS);
 
 
