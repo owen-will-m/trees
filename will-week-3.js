@@ -4,7 +4,7 @@
      let circles = [];
      let drawingPath = false;
      let clear = false;
-     const TREECOLORS = ["#40382C", "#4A4033", "#332C26", "#4A3D33", "#423B36"];
+     const TREECOLORS = ["#40382C", "#4A4033", "#4A3D33", "#423B36"];
      const DEPTH = 6;
      ///////////////////////////////////
      ///////////////////////////////////
@@ -234,7 +234,7 @@
           for (let i = 0; i < n; i++) {
                let y = btwn(h, 400);
                circles.push({
-                    x: btwn(0, 400),
+                    x: btwn(0, 600),
                     y: y,
                     w: btwn(w - wd, w + wd) * y / 200.0,
                     color: {
@@ -311,7 +311,7 @@
      }
 
      function setup() {
-          createCanvas(400, 400);
+          createCanvas(600, 400);
           frameRate(20);
           makeCircles(100, 50, 10, 10);
           button = createButton("Clear");
@@ -323,12 +323,16 @@
 
      function draw() {
 
-          cursor("crosshair");
+
           background("#3D221F");
+
           fill("#A85D54");
           noStroke();
-          rect(0, 0, 400, 50)
+          rect(0, 0, 600, 50)
           drawCircles();
           drawTrees(trees);
+          image(img, 0, 0);
+          cursor(CROSS);
+
 
      }
