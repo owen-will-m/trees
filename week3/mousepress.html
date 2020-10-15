@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>ShapePrimitives \ Examples \ Processing.org</title>
+		<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="Author" content="Casey Reas &amp; Ben Fry" />
+		<meta name="Publisher" content="Processing" />
+		<meta name="Keywords" content="Processing, Processing, Interactive Media, Electronic Arts, Programming, Java, Ben Fry, Casey Reas" />
+		<meta name="Description" content="Processing is an electronic sketchbook for developing 
+				ideas. It is a context for learning fundamentals of computer programming 
+				within the context of the electronic arts." />
+		<meta name="Copyright" content="All contents copyright Ben Fry, Casey Reas, MIT Media Laboratory" />
+	    
+	    <script src="modernizr-2.6.2.touch.js" type="text/javascript"></script>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<style>
+		canvas {
+			position:absolute;
+			top:200px;
+			left:300px;
+		}
+		</style>
+	</head>
+	<body id="Examples" onload="" >
+<div class="content">
+<div class="examples-nav"></div>
+<div class="example">
+<script type="application/processing">
+int a = 0;      // Create a variable "a" of the datatype "int"
+float b = 0.0;  // Create a variable "b" of the datatype "float"
+int c = 200;
+int d = 200;
+int adirection = 10;
+int bdirection = 20;
+int cdirection = 10;
+int ddirection = 20;
+int changevalue = 10;
+
+void setup() {
+  size(640, 340);
+  stroke(255);
+  frameRate(60);
+}
+
+float x = 1;
+float xdirection = 1;
+float ydirection = -1;
+float y = 2;
+float velocity = 12;
+
+void draw() {
+noStroke()
+  background(255);
+ 
+  if(a > width) {
+    adirection = -changevalue;
+  }
+  if (a < 0) {
+    adirection = changevalue;  
+  }
+  if(b > width) {
+    bdirection = -10;
+  }
+  if (b < 0) {
+    bdirection = 10;  
+  }
+ 
+  a = a + adirection;
+  b = b + bdirection;
+  c = c + cdirection*random(5,15);
+  d = d + ddirection*random(5,15);
+  strokeWeight(1);
+  stroke(255, 255, 0);
+  line(b, 20, a, height-20);
+  x = x + velocity*xdirection;
+  y = y + velocity*ydirection;
+  if(x < 50) {
+      x = 50;
+      xdirection = 1;
+  }
+  if(x > width - 70) {
+      x = width - 70;
+      xdirection = -1;
+  }
+  if(y < 70) {
+      y = 70;
+      ydirection = 1;
+  }
+  if(y > height - 70) {
+      y = height - 70;
+      ydirection = -1;
+  }
+  if(c < 50) {
+      c = 50;
+      cdirection = 1;
+  }
+  if(c > width - 70) {
+      c = width - 70;
+      cdirection = -1;
+  }
+  if(d < 70) {
+      d = 70;
+      ddirection = 1;
+  }
+  if(d > height - 70) {
+      d = height - 70;
+      ddirection = -1;
+  }
+  fill(255, 102, 51  );
+  quad(0,20,b,20,a,height-20,0,height-20);
+
+  fill(255, 255, 255);
+  quad(b,20,width,20,width,height-20,a,height-20);
+  fill(255, 0, 51);
+  
+  if (mousePressed == true) {
+    if(hit_test(x, mouseX, y, mouseY) > 0) {
+  	  xdirection *= -1;
+  	  ydirection *= -1;
+  	  cdirection *= -1;
+  	  ddirection *= -1;
+  	}
+  }
+  
+  //BALL 1:
+  noStroke()
+  ellipse(x,y,50,50);
+   noStroke()
+   fill(255, 167, 38)
+  ellipse(x,y,30,30);
+  
+  //BALL 2:
+  if (mousePressed == true) {
+	 fill(57, 73, 171);
+	 noStroke()
+	 ellipse(mouseX,mouseY,50,50);
+	 noStroke()
+	 fill(144, 202, 249)
+	 ellipse(mouseX,mouseY,25,25);
+  }
+  fill(0);
+  text(" hold the mouse button for second ball", 0, 330);
+}
+
+int hit_test(x1, x2, y1, y2) {
+	if(sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)) < 50) {
+		return 1;
+	} else {
+		return -1;
+	}
+}
+
+void keyPressed() {
+  // The variable "key" always contains the value
+  // of the most recent key pressed.
+  if ((key >= 'A' && key <= 'z') || key == ' ') {
+    changevalue = key/5;
+  }
+}
+</script>
+<canvas width="640" height="640"></canvas>
+</div>
+</div>
+<script src="jquery-1.11.0.min.js"></script>
+<!--<script>window.jQuery || document.write('<script src="jquery-1.9.1.min.js"><\/script>')</script>-->
+<script src="processing.js" type="text/javascript"></script>
+<script src="site.js" type="text/javascript"></script>
+</body>
+</html>
